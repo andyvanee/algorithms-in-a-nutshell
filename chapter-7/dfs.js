@@ -42,11 +42,11 @@ function cell(str, optionalDepth) {
 //
 // The search algorithm (mostly) as presented in Figure 7-5
 //
-function depthFirstSearch(initial, goal) {
+function depthFirstSearch(initial, goal, _maxDepth) {
   var open     = stack(initial)
   ,   closed   = set()
   ,   solution = false
-  ,   maxDepth = 20
+  ,   maxDepth = _maxDepth ? _maxDepth : 20
   ;
 
   if (initial.eq(goal)) { solution = goal }

@@ -16,5 +16,12 @@ assertEqual(
 
 assertEqual(
   8,
-  depthFirstSearch(cell('0-0'), cell('4-4')).depth()
+  depthFirstSearch(cell('0-0'), cell('4-4')).depth(),
+  "4-4 takes takes 8 moves to complete"
+);
+
+assertEqual(
+  false,
+  depthFirstSearch(cell('0-0'), cell('4-4'), 7),
+  "Doesn't find the cell if it's further than maxDepth"
 );
