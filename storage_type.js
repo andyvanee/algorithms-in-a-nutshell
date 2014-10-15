@@ -21,7 +21,7 @@
       return {
         length: function() { return stack.length },
         pop: function(){ return stack.pop() },
-        insert: function(val) { return stack.push(val) }
+        push: function(val) { return stack.push(val) }
       }
     },
 

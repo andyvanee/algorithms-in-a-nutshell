@@ -30,7 +30,7 @@ function depthFirstSearch(initial, goal, _maxDepth) {
       explored += 1;
       if (closed.contains(next.toString())) return;
       if (next.eq(goal)) s = solution(next, explored);
-      if (next.depth() < maxDepth) open.insert(next);
+      if (next.depth() < maxDepth) open.push(next);
     });
   }
   return s;
