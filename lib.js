@@ -34,12 +34,12 @@ function cell2(str, optionalDepth) {
   };
 }
 
-function solution(cell, iterations) {
+function solution(cell, explored) {
   cell = cell ? cell : false;
-  iterations = iterations > 0 ? iterations : 0;
+  explored = explored > 0 ? explored : 0;
   return {
     cell: function() { return cell },
-    iterations: function() { return iterations },
+    explored: function() { return explored },
     solved: function(){
       return this.cell() !== false;
     }

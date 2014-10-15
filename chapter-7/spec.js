@@ -27,6 +27,11 @@ assertEqual(
 );
 
 assertEqual(
+  8,
+  depthFirstSearch(cell2('0-0'), cell2('2-1'), 3).explored()
+);
+
+assertEqual(
   '0-0',
   breadthFirstSearch(cell2('0-0'), cell2('0-0')).cell().toString()
 );
@@ -34,4 +39,9 @@ assertEqual(
 assertEqual(
   '4-6',
   breadthFirstSearch(cell2('0-0'), cell2('4-6')).cell().toString()
+);
+
+assertEqual(
+  9,
+  breadthFirstSearch(cell2('0-0'), cell2('2-1')).explored()
 );

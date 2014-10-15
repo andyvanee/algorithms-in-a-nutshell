@@ -15,9 +15,10 @@ function breadthFirstSearch(initial, goal, _maxDepth) {
   ,   closed   = storage.set()
   ,   s = solution()
   ,   maxDepth = _maxDepth ? _maxDepth : 20
+  ,   explored = 1
   ;
 
-  if (initial.eq(goal)) { s = solution(goal) }
+  if (initial.eq(goal)) { s = solution(goal, explored) }
 
   while (open.length() && s.solved() === false) {
     var n = open.head();
@@ -25,8 +26,9 @@ function breadthFirstSearch(initial, goal, _maxDepth) {
     closed.insert(n.toString());
 
     n.moves(function(next) {
+      explored += 1;
       if (closed.contains(next.toString())) return;
-      if (next.eq(goal)) s = solution(next);
+      if (next.eq(goal)) s = solution(next, explored);
       if (next.depth() < maxDepth) open.insert(next);
     });
   }
