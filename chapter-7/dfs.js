@@ -3,16 +3,14 @@
 // Figure 7-5
 //
 
-var set = require('../lib').set
-,   stack = require('../lib').stack
-;
+var storage = require('../storage');
 
 //
 // The search algorithm (mostly) as presented in Figure 7-5
 //
 function depthFirstSearch(initial, goal, _maxDepth) {
-  var open     = stack(initial)
-  ,   closed   = set()
+  var open     = storage.stack(initial)
+  ,   closed   = storage.set()
   ,   solution = false
   ,   maxDepth = _maxDepth ? _maxDepth : 20
   ;

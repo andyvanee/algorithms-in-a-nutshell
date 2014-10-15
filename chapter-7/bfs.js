@@ -3,16 +3,14 @@
 // Figure 7-8
 //
 
-var set = require('../lib').set
-,   queue = require('../lib').queue
-;
+var storage = require('../storage');
 
 //
 // The search algorithm (mostly) as presented in Figure 7-8
 //
 function breadthFirstSearch(initial, goal, _maxDepth) {
-  var open     = queue(initial)
-  ,   closed   = set()
+  var open     = storage.queue(initial)
+  ,   closed   = storage.set()
   ,   solution = false
   ,   maxDepth = _maxDepth ? _maxDepth : 20
   ;
