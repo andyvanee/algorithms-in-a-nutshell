@@ -1,5 +1,3 @@
-function not(q) { return !q; }
-
 function assertEqual(a, b) {
   if (a === b) { process.stdout.write('.') }
   else { console.log('Failed assertEqual: ' + a + ' == ' + b) }
@@ -75,7 +73,6 @@ function cell2(str, optionalDepth) {
 }
 
 module.exports = {
-  not: not,
   set: set,
   assertEqual: assertEqual,
   stack: stack,

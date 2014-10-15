@@ -3,8 +3,7 @@
 // Figure 7-5
 //
 
-var not = require('../lib').not
-,   set = require('../lib').set
+var set = require('../lib').set
 ,   stack = require('../lib').stack
 ;
 
@@ -26,10 +25,9 @@ function depthFirstSearch(initial, goal, _maxDepth) {
     closed.insert(n.toString());
 
     n.moves(function(next) {
-      if (not(closed.contains(next.toString()))) {
-        next.eq(goal) && (solution = next);
-        (next.depth() < maxDepth) && open.insert(next);
-      }
+      if (closed.contains(next.toString())) return;
+      if (next.eq(goal)) solution = next;
+      if (next.depth() < maxDepth) open.insert(next);
     });
   }
   return solution ? solution : false;

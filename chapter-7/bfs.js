@@ -3,8 +3,7 @@
 // Figure 7-8
 //
 
-var not = require('../lib').not
-,   set = require('../lib').set
+var set = require('../lib').set
 ,   queue = require('../lib').queue
 ;
 
@@ -26,10 +25,9 @@ function breadthFirstSearch(initial, goal, _maxDepth) {
     closed.insert(n.toString());
 
     n.moves(function(next) {
-      if (not(closed.contains(next.toString()))) {
-        next.eq(goal) && (solution = next);
-        (next.depth() < maxDepth) && open.insert(next);
-      }
+      if (closed.contains(next.toString())) return;
+      if (next.eq(goal)) solution = next;
+      if (next.depth() < maxDepth) open.insert(next);
     });
   }
   return solution ? solution : false;
