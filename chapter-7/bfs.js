@@ -3,7 +3,7 @@
 // Figure 7-8
 //
 
-var storage = require('../storage');
+var storage = require('../storage_type').StorageType;
 
 //
 // The search algorithm (mostly) as presented in Figure 7-8
