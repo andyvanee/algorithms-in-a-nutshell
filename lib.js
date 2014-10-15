@@ -18,7 +18,7 @@ function set() {
 }
 
 //
-// Implementation of stack, using an array
+// Implementation of stack, using an array (LIFO)
 //
 function stack(args, etc) {
   var stack = Array.prototype.slice.call(arguments);
@@ -27,6 +27,19 @@ function stack(args, etc) {
     length: function() { return stack.length },
     pop: function(){ return stack.pop() },
     insert: function(val) { return stack.unshift(val) }
+  }
+}
+
+//
+// Implementation of queue, using an array (FIFO)
+//
+function queue(args, etc) {
+  var queue = Array.prototype.slice.call(arguments);
+
+  return {
+    length: function() { return queue.length },
+    head: function() { return queue.shift() },
+    insert: function(val) { return queue.push(val) }
   }
 }
 
@@ -66,5 +79,6 @@ module.exports = {
   set: set,
   assertEqual: assertEqual,
   stack: stack,
+  queue: queue,
   cell2: cell2
 }

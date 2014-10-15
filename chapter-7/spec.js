@@ -1,5 +1,6 @@
 var assertEqual = require('../lib').assertEqual
-,   depthFirstSearch = require('./dfs').depthFirstSearch
+,   depthFirstSearch = require('./dfs')
+,   breadthFirstSearch = require('./bfs')
 ,   cell2 = require('../lib').cell2
 ;
 
@@ -23,4 +24,14 @@ assertEqual(
   false,
   depthFirstSearch(cell2('0-0'), cell2('4-4'), 7),
   "Doesn't find the cell if it's further than maxDepth"
+);
+
+assertEqual(
+  '0-0',
+  breadthFirstSearch(cell2('0-0'), cell2('0-0')).toString()
+);
+
+assertEqual(
+  '4-6',
+  breadthFirstSearch(cell2('0-0'), cell2('4-6')).toString()
 );

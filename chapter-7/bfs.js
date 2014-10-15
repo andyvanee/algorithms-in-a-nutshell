@@ -1,18 +1,18 @@
 //
-// DEPTH-FIRST SEARCH
-// Figure 7-5
+// BREADTH-FIRST SEARCH
+// Figure 7-8
 //
 
 var not = require('../lib').not
 ,   set = require('../lib').set
-,   stack = require('../lib').stack
+,   queue = require('../lib').queue
 ;
 
 //
-// The search algorithm (mostly) as presented in Figure 7-5
+// The search algorithm (mostly) as presented in Figure 7-8
 //
-function depthFirstSearch(initial, goal, _maxDepth) {
-  var open     = stack(initial)
+function breadthFirstSearch(initial, goal, _maxDepth) {
+  var open     = queue(initial)
   ,   closed   = set()
   ,   solution = false
   ,   maxDepth = _maxDepth ? _maxDepth : 20
@@ -21,7 +21,7 @@ function depthFirstSearch(initial, goal, _maxDepth) {
   if (initial.eq(goal)) { solution = goal }
 
   while (open.length() && solution === false) {
-    var n = open.pop();
+    var n = open.head();
 
     closed.insert(n.toString());
 
@@ -35,5 +35,4 @@ function depthFirstSearch(initial, goal, _maxDepth) {
   return solution ? solution : false;
 }
 
-module.exports = depthFirstSearch;
-
+module.exports = breadthFirstSearch;
