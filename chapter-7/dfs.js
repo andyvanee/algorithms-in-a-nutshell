@@ -12,7 +12,7 @@ var storage = require('../storage_type').StorageType
 // The search algorithm (mostly) as presented in Figure 7-5
 //
 function depthFirstSearch(initial, goal, _maxDepth) {
-  var open     = storage.stack(initial)
+  var open     = storage.stack([initial])
   ,   closed   = storage.set()
   ,   s = solution()
   ,   maxDepth = _maxDepth ? _maxDepth : 20
