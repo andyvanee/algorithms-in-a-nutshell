@@ -14,25 +14,35 @@ function cell(str, optionalDepth) {
   ;
 
   return {
+    // The search depth, which is incremented each generation
     depth: function(){ return depth },
+    // A string representation
     toString: function(){ return str },
+    // The left-hand value
     x: function(){ return parseInt(parts[0]) },
+    // The right-hand value
     y: function(){ return parseInt(parts[1]) },
+    // Iterate the next available moves with the supplied callback
     moves: function(cb){
       return [
         cell([this.x()+1, this.y()  ].join('-'), this.depth()+1),
         cell([this.x()  , this.y()+1].join('-'), this.depth()+1)
       ].forEach(cb)
     },
+    // Check if this cell is equivalent to another given cell
     eq: function(other) {
-      return (other.toString() == str)
+      return (other.toString() == this.toString())
     },
+    // Check if the hash contains this cell
     in: function(hash) {
       return hash[this.toString()] !== undefined;
     }
   };
 }
 
+//
+// The search algorithm (mostly) as presented in Figure 7-5
+//
 function depthFirstSearch(initial, goal){
   var open = [initial]
   ,   closed = {}
