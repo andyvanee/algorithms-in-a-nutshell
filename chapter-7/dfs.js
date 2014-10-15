@@ -18,15 +18,15 @@ function cell(str, optionalDepth) {
 
   return {
     // The search depth, which is incremented each generation
-    depth: function(){ return depth },
+    depth: function() { return depth },
     // A string representation
-    toString: function(){ return str },
+    toString: function() { return str },
     // The left-hand value
-    x: function(){ return parseInt(parts[0]) },
+    x: function() { return parseInt(parts[0]) },
     // The right-hand value
-    y: function(){ return parseInt(parts[1]) },
+    y: function() { return parseInt(parts[1]) },
     // Iterate the next available moves with the supplied callback
-    moves: function(cb){
+    moves: function(cb) {
       return [
         cell([this.x()+1, this.y()  ].join('-'), this.depth()+1),
         cell([this.x()  , this.y()+1].join('-'), this.depth()+1)
@@ -42,9 +42,9 @@ function cell(str, optionalDepth) {
 //
 // The search algorithm (mostly) as presented in Figure 7-5
 //
-function depthFirstSearch(initial, goal){
-  var open = stack(initial)
-  ,   closed = set()
+function depthFirstSearch(initial, goal) {
+  var open     = stack(initial)
+  ,   closed   = set()
   ,   solution = false
   ,   maxDepth = 20
   ;
@@ -56,7 +56,7 @@ function depthFirstSearch(initial, goal){
 
     closed.insert(n.toString());
 
-    n.moves(function(next){
+    n.moves(function(next) {
       if (not(closed.contains(next.toString()))) {
         next.eq(goal) && (solution = next);
         (next.depth() < maxDepth) && open.insert(next);
