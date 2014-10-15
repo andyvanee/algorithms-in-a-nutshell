@@ -3,7 +3,9 @@
 // Figure 7-5
 //
 
-var not = require('../lib').not;
+var not = require('../lib').not
+,   set = require('../lib').set
+;
 
 //
 // A cell is constructed from a string like "0-0"
@@ -32,10 +34,6 @@ function cell(str, optionalDepth) {
     // Check if this cell is equivalent to another given cell
     eq: function(other) {
       return (other.toString() == this.toString())
-    },
-    // Check if the hash contains this cell
-    in: function(hash) {
-      return hash[this.toString()] !== undefined;
     }
   };
 }
@@ -45,7 +43,7 @@ function cell(str, optionalDepth) {
 //
 function depthFirstSearch(initial, goal){
   var open = [initial]
-  ,   closed = {}
+  ,   closed = set()
   ,   solution = false
   ,   maxDepth = 20
   ;
@@ -55,12 +53,12 @@ function depthFirstSearch(initial, goal){
   while (open.length && solution === false) {
     var n = open.shift();
 
-    closed[n.toString()] = true;
+    closed.insert(n.toString());
 
     n.moves(function(next){
-      if (not(next.in(closed))) {
-        next.eq(goal) ? (solution = next) : false;
-        (next.depth() < maxDepth) ? open.push(next) : false;
+      if (not(closed.contains(next.toString()))) {
+        next.eq(goal) && (solution = next);
+        (next.depth() < maxDepth) && open.push(next);
       }
     });
   }
