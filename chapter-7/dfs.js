@@ -5,6 +5,7 @@
 
 var not = require('../lib').not
 ,   set = require('../lib').set
+,   stack = require('../lib').stack
 ;
 
 //
@@ -42,7 +43,7 @@ function cell(str, optionalDepth) {
 // The search algorithm (mostly) as presented in Figure 7-5
 //
 function depthFirstSearch(initial, goal){
-  var open = [initial]
+  var open = stack(initial)
   ,   closed = set()
   ,   solution = false
   ,   maxDepth = 20
@@ -50,15 +51,15 @@ function depthFirstSearch(initial, goal){
 
   if (initial.eq(goal)) { solution = goal }
 
-  while (open.length && solution === false) {
-    var n = open.shift();
+  while (open.length() && solution === false) {
+    var n = open.pop();
 
     closed.insert(n.toString());
 
     n.moves(function(next){
       if (not(closed.contains(next.toString()))) {
         next.eq(goal) && (solution = next);
-        (next.depth() < maxDepth) && open.push(next);
+        (next.depth() < maxDepth) && open.insert(next);
       }
     });
   }

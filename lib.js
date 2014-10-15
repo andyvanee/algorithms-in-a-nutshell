@@ -17,8 +17,21 @@ function set(){
   }
 }
 
+//
+// Implementation of stack, using an array
+//
+function stack(args, etc){
+  var stack = Array.prototype.slice.call(arguments);
+  return {
+    length: function() { return stack.length },
+    pop: function(){ return stack.pop() },
+    insert: function(val) { return stack.unshift(val) }
+  }
+}
+
 module.exports = {
   not: not,
   set: set,
-  assertEqual: assertEqual
+  assertEqual: assertEqual,
+  stack: stack
 }
