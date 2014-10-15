@@ -3,7 +3,9 @@
 // Figure 7-8
 //
 
-var storage = require('../storage_type').StorageType;
+var storage = require('../storage_type').StorageType
+,   solution = require('../lib').solution
+;
 
 //
 // The search algorithm (mostly) as presented in Figure 7-8
@@ -11,24 +13,24 @@ var storage = require('../storage_type').StorageType;
 function breadthFirstSearch(initial, goal, _maxDepth) {
   var open     = storage.queue(initial)
   ,   closed   = storage.set()
-  ,   solution = false
+  ,   s = solution()
   ,   maxDepth = _maxDepth ? _maxDepth : 20
   ;
 
-  if (initial.eq(goal)) { solution = goal }
+  if (initial.eq(goal)) { s = solution(goal) }
 
-  while (open.length() && solution === false) {
+  while (open.length() && s.solved() === false) {
     var n = open.head();
 
     closed.insert(n.toString());
 
     n.moves(function(next) {
       if (closed.contains(next.toString())) return;
-      if (next.eq(goal)) solution = next;
+      if (next.eq(goal)) s = solution(next);
       if (next.depth() < maxDepth) open.insert(next);
     });
   }
-  return solution ? solution : false;
+  return s;
 }
 
 module.exports = breadthFirstSearch;

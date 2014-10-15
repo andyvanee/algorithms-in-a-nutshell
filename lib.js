@@ -34,7 +34,20 @@ function cell2(str, optionalDepth) {
   };
 }
 
+function solution(cell, iterations) {
+  cell = cell ? cell : false;
+  iterations = iterations > 0 ? iterations : 0;
+  return {
+    cell: function() { return cell },
+    iterations: function() { return iterations },
+    solved: function(){
+      return this.cell() !== false;
+    }
+  }
+}
+
 module.exports = {
   assertEqual: assertEqual,
-  cell2: cell2
+  cell2: cell2,
+  solution: solution
 }
