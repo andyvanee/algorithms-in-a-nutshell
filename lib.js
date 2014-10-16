@@ -49,6 +49,9 @@ function rankedCell(str, target, depth){
   }
 
   function fStar() {
+    if (targetCell.x() < delegate.x() || targetCell.y() < delegate.y()) {
+      return Infinity;
+    }
     return (targetCell.x() - delegate.x()) + (targetCell.y() - delegate.y());
   }
 
