@@ -47,6 +47,41 @@
         head: function() { return queue.shift() },
         insert: function(val) { return queue.push(val) }
       }
+    },
+
+    priorityQueue: function(initialArray) {
+      initialArray = initialArray ? initialArray : [];
+
+      var pq = {};
+
+      function push(i) {
+        var rank = i.rank();
+        if (pq[i] === undefined) { pq[i] = [] }
+        pq[i].push(i);
+      }
+
+      function compareInts(a, b){
+        return parseInt(a) > parseInt(b);
+      }
+
+      initialArray.forEach(push);
+
+      return {
+        push: push,
+        pop: function() {
+          var key = Object.keys(pq).sort(compareInts).pop()
+          ,   val = pq[key].pop()
+          ;
+          if (pq[key].length === 0) delete pq[key];
+          return val;
+        },
+        length: function() {
+          var total = 0;
+          Object.keys(pq).forEach(function(k){ total += pq[k].length });
+          return total;
+        }
+      }
+
     }
   }
 })(typeof module !== 'undefined' && module.exports ? module.exports : this);
