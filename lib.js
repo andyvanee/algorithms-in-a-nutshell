@@ -34,7 +34,7 @@ function cell2(str, optionalDepth) {
   };
 }
 
-function rankedCell(str, target, depth){
+function rankedCell2(str, target, depth){
   var delegate = cell2(str, depth)
   ,   targetCell = cell2(target)
   ,   self = {}
@@ -62,7 +62,7 @@ function rankedCell(str, target, depth){
   self.moves = function(cb){
     var rankedCells = [];
     delegate.moves(function(innerCell){
-      var innerRanked = rankedCell(innerCell.toString(), target, innerCell.depth());
+      var innerRanked = rankedCell2(innerCell.toString(), target, innerCell.depth());
       rankedCells.push(innerRanked);
       if (cb) { cb(innerRanked) }
     })
@@ -87,6 +87,6 @@ function solution(cell, explored) {
 module.exports = {
   assertEqual: assertEqual,
   cell2: cell2,
-  rankedCell: rankedCell,
+  rankedCell2: rankedCell2,
   solution: solution
 }
