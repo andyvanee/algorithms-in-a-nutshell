@@ -60,6 +60,13 @@ var assertEqual = require('../lib').assertEqual
   assertEqual(2, rankedCell('0-0', '0-0').moves().length);
   assertEqual(1, rankedCell('0-0', '0-1').moves().pop().depth());
   assertEqual(1, rankedCell('0-0', '0-1').moves().pop().rank());
+  assertEqual(Infinity, rankedCell('1-1', '0-1').moves().pop().rank());
+}());
+
+(function testAStarSearch(){
+  assertEqual('2-1', aStar(cell2('0-0'), cell2('2-1')).cell().toString());
+  assertEqual(7,     aStar(cell2('0-0'), cell2('2-1')).explored());
+  assertEqual(29,    aStar(cell2('0-0'), cell2('1-6')).explored()); // Seems large??
 }());
 
 (function testStorageTypes(){
@@ -72,12 +79,12 @@ var assertEqual = require('../lib').assertEqual
 
   var pq = storage.priorityQueue();
   pq.push({name: 'a', rank: function(){ return 1; }});
-  pq.push({name: 'b', rank: function(){ return 2; }});
-  pq.push({name: 'c', rank: function(){ return 2; }});
+  pq.push({name: 'b', rank: function(){ return 4; }});
+  pq.push({name: 'c', rank: function(){ return 4; }});
 
   assertEqual(3, pq.length());
-  assertEqual('c', pq.pop().name);
-  assertEqual('b', pq.pop().name);
   assertEqual('a', pq.pop().name);
+  assertEqual('b', pq.pop().name);
+  assertEqual('c', pq.pop().name);
   assertEqual(0, pq.length());
 }());
