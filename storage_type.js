@@ -3,17 +3,12 @@
     //
     // Implementation of set, using the keys of a hash
     //
-    set: function(initialArray) {
-      initialArray = initialArray ? initialArray : [];
-
+    set: function() {
       var set = {};
 
-      initialArray.forEach(function(elem){
-        set[elem] = true;
-      });
-
       return {
-        add:      function(k) { set[k] = true },
+        add:      function(k, v) { v = v ? v : true; set[k] = v },
+        get:      function(k) { return set[k] },
         remove:   function(k) { delete set[k] },
         contains: function(k) { return (k in set) }
       }
@@ -56,8 +51,8 @@
 
       function push(i) {
         var rank = i.rank();
-        if (pq[i] === undefined) { pq[i] = [] }
-        pq[i].push(i);
+        if (pq[rank] === undefined) { pq[rank] = [] }
+        pq[rank].push(i);
       }
 
       function compareInts(a, b){
@@ -69,8 +64,8 @@
       return {
         push: push,
         pop: function() {
-          var key = Object.keys(pq).sort(compareInts).pop()
-          ,   val = pq[key].pop()
+          var key = Object.keys(pq).sort(compareInts).shift()
+          ,   val = pq[key].shift()
           ;
           if (pq[key].length === 0) delete pq[key];
           return val;
