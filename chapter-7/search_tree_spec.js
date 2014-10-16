@@ -87,3 +87,5 @@ var assertEqual = require('../lib').assertEqual
   assertEqual('c', pq.pop().name);
   assertEqual(0, pq.length());
 }());
+
+console.log('*');
