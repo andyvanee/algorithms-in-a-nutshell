@@ -23,7 +23,7 @@ function breadthFirstSearch(initial, goal, _maxDepth) {
   while (open.length() && s.solved() === false) {
     var n = open.head();
 
-    closed.insert(n.toString());
+    closed.add(n.toString());
 
     n.moves(function(next) {
       explored += 1;

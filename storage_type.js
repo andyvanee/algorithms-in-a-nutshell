@@ -4,16 +4,18 @@
     // Implementation of set, using the keys of a hash
     //
     set: function(initialArray) {
-      var _hash = {};
       initialArray = initialArray ? initialArray : [];
 
+      var set = {};
+
       initialArray.forEach(function(elem){
-        _hash[elem] = true;
+        set[elem] = true;
       });
 
       return {
-        insert: function(k) { _hash[k] = true },
-        contains: function(k) { _hash[k] !== undefined }
+        add:      function(k) { set[k] = true },
+        remove:   function(k) { delete set[k] },
+        contains: function(k) { return (k in set) }
       }
     },
 
@@ -21,6 +23,8 @@
     // Implementation of stack, using an array (LIFO)
     //
     stack: function(initialArray) {
+      initialArray = initialArray ? initialArray : [];
+
       var stack = Array.prototype.slice.call(initialArray);
 
       return {
@@ -34,6 +38,8 @@
     // Implementation of queue, using an array (FIFO)
     //
     queue: function(initialArray) {
+      initialArray = initialArray ? initialArray : [];
+
       var queue = Array.prototype.slice.call(initialArray);
 
       return {

@@ -24,7 +24,7 @@ function depthFirstSearch(initial, goal, _maxDepth) {
   while (open.length() && s.solved() === false) {
     var n = open.pop();
 
-    closed.insert(n.toString());
+    closed.add(n.toString());
 
     n.moves(function(next) {
       explored += 1;
