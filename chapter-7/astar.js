@@ -5,14 +5,14 @@
 
 var storage = require('../storage_type').StorageType
 ,   solution = require('../lib').solution
-,   rankedCell = require('../lib').rankedCell
+,   cell = require('../lib').cell
 ;
 
 //
 // The search algorithm (mostly) as presented in Figure 7-10
 //
 function aStar(initial, goal) {
-  var initialRanked = rankedCell(initial.toString(), goal.toString())
+  var initialRanked = cell.rankedTwo(initial.toString(), goal.toString())
   ,   open     = storage.priorityQueue([initialRanked])
   ,   closed   = storage.set()
   ,   s = solution()
