@@ -34,6 +34,41 @@ function cell2(str, optionalDepth) {
   };
 }
 
+function rankedCell(str, target, depth){
+  var delegate = cell2(str, depth)
+  ,   targetCell = cell2(target)
+  ,   self = {}
+  ;
+
+  for (var i in delegate) {
+    self[i] = delegate[i]
+  }
+
+  function gStar() {
+    return delegate.depth();
+  }
+
+  function fStar() {
+    return (targetCell.x() - delegate.x()) + (targetCell.y() - delegate.y());
+  }
+
+  self.rank = function(){
+    return gStar() + fStar();
+  }
+
+  self.moves = function(cb){
+    var rankedCells = [];
+    delegate.moves(function(innerCell){
+      var innerRanked = rankedCell(innerCell.toString(), target, innerCell.depth());
+      rankedCells.push(innerRanked);
+      if (cb) { cb(innerRanked) }
+    })
+    return rankedCells;
+  }
+
+  return self;
+}
+
 function solution(cell, explored) {
   cell = cell ? cell : false;
   explored = explored > 0 ? explored : 0;
@@ -49,5 +84,6 @@ function solution(cell, explored) {
 module.exports = {
   assertEqual: assertEqual,
   cell2: cell2,
+  rankedCell: rankedCell,
   solution: solution
 }
