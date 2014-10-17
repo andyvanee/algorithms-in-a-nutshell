@@ -5,6 +5,7 @@
 
 var storage = require('../storage_type').StorageType
 ,   solution = require('../lib').solution
+,   mori = require('mori')
 ;
 
 //
@@ -12,7 +13,7 @@ var storage = require('../storage_type').StorageType
 //
 function breadthFirstSearch(initial, goal, _maxDepth) {
   var open     = storage.queue([initial])
-  ,   closed   = storage.set()
+  ,   closed   = mori.set()
   ,   s = solution()
   ,   maxDepth = _maxDepth ? _maxDepth : 20
   ,   explored = 1
@@ -23,11 +24,11 @@ function breadthFirstSearch(initial, goal, _maxDepth) {
   while (open.length() && s.solved() === false) {
     var n = open.head();
 
-    closed.add(n.toString());
+    mori.conj(closed, n.toString());
 
     n.moves(function(next) {
       explored += 1;
-      if (closed.contains(next.toString())) return;
+      if (closed.has(next.toString())) return;
       if (next.eq(goal)) s = solution(next, explored);
       if (next.depth() < maxDepth) open.insert(next);
     });

@@ -5,6 +5,7 @@
 
 var storage = require('../storage_type').StorageType
 ,   solution = require('../lib').solution
+,   mori = require('mori')
 ;
 
 
@@ -13,7 +14,7 @@ var storage = require('../storage_type').StorageType
 //
 function depthFirstSearch(initial, goal, _maxDepth) {
   var open     = storage.stack([initial])
-  ,   closed   = storage.set()
+  ,   closed   = mori.set()
   ,   s = solution()
   ,   maxDepth = _maxDepth ? _maxDepth : 20
   ,   explored = 1
@@ -24,11 +25,11 @@ function depthFirstSearch(initial, goal, _maxDepth) {
   while (open.length() && s.solved() === false) {
     var n = open.pop();
 
-    closed.add(n.toString());
+    closed = mori.conj(closed, n.toString());
 
     n.moves(function(next) {
       explored += 1;
-      if (closed.contains(next.toString())) return;
+      if (closed.has(next.toString())) return;
       if (next.eq(goal)) s = solution(next, explored);
       if (next.depth() < maxDepth) open.push(next);
     });
@@ -37,4 +38,3 @@ function depthFirstSearch(initial, goal, _maxDepth) {
 }
 
 module.exports = depthFirstSearch;
-
