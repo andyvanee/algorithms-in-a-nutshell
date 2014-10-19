@@ -1,8 +1,3 @@
-function assertEqual(a, b) {
-  if (a === b) { process.stdout.write('.') }
-  else { console.log('Failed assertEqual: ' + a + ' == ' + b) }
-}
-
 var cell = {
   //
   // A cell.two is constructed from a string like "0-0"
@@ -87,7 +82,6 @@ function solution(cell, explored) {
 }
 
 module.exports = {
-  assertEqual: assertEqual,
   cell: cell,
   solution: solution
 }
