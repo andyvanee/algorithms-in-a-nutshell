@@ -1,0 +1,22 @@
+{
+  "name": "algorithms-in-a-nutshell",
+  "version": "0.0.0",
+  "description": "Algorithms In A Nutshell",
+  "main": "lib.js",
+  "scripts": {
+    "test": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Andyvanee/algorithms-in-a-nutshell.git"
+  },
+  "author": "Andy Vanee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andyvanee/algorithms-in-a-nutshell/issues"
+  },
+  "homepage": "https://github.com/Andyvanee/algorithms-in-a-nutshell",
+  "dependencies": {
+    "mori": "~0.2.9"
+  }
+}
